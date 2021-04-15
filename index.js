@@ -37,13 +37,13 @@ client.connect((err) => {
     AdminCollection.insertOne(adminInfo).then((result) => {
       res.send(result.insertedCount > 0);
     });
-    console.log(adminInfo);
+    // console.log(adminInfo);
   });
 
   //CHECK IsADMIN
   app.get("/isAdmin", (req, res) => {
     const email = req.query.email;
-    console.log(email);
+    // console.log(email);
     AdminCollection.find({ email }).toArray((err, document) => {
       res.send(document.length > 0);
     });
@@ -55,7 +55,7 @@ client.connect((err) => {
     ServiceCollection.insertOne(serviceInfo).then((result) => {
       res.send(result.insertedCount > 0);
     });
-    console.log(serviceInfo);
+    // console.log(serviceInfo);
   });
 
   //READ SERVICES
@@ -68,7 +68,7 @@ client.connect((err) => {
   //DELETE SERVICE
   app.delete("/delete/:id", (req, res) => {
     const serviceId = req.params.id;
-    console.log(ObjectId(serviceId));
+    // console.log(ObjectId(serviceId));
     ServiceCollection.deleteOne({
       _id: ObjectId(serviceId),
     }).then((result) => {
@@ -90,8 +90,8 @@ client.connect((err) => {
     ).then((result) => {
       res.send(result.modifiedCount > 0);
     });
-    console.log(serviceId);
-    console.log(serviceInfo);
+    // console.log(serviceId);
+    // console.log(serviceInfo);
     // res.send(serviceId);
   });
 
@@ -101,7 +101,7 @@ client.connect((err) => {
     ReviewCollection.insertOne(reviewInfo).then((result) => {
       res.send(result.insertedCount > 0);
     });
-    console.log(reviewInfo);
+    // console.log(reviewInfo);
   });
 
   //READ REVIEWS
@@ -118,7 +118,7 @@ client.connect((err) => {
     OrderCollection.insertOne(orderInfo).then((result) => {
       res.send(result.insertedCount > 0);
     });
-    console.log(orderInfo);
+    // console.log(orderInfo);
   });
 
   //READ ORDERS
@@ -139,7 +139,7 @@ client.connect((err) => {
         });
       }
     });
-    console.log(userInfo);
+    // console.log(userInfo);
   });
 
   //UPDATE ORDER STATUS
