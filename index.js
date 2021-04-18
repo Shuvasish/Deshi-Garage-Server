@@ -1,8 +1,10 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
-app.use(cors());
+// const bodyParser = require("body-parser");
 app.use(express.json());
+app.use(cors());
+app.use(express.urlencoded({ extended: false }));
 require("dotenv").config();
 
 const port = 4000;
@@ -61,6 +63,16 @@ client.connect((err) => {
   //READ SERVICES
   app.get("/services", (req, res) => {
     ServiceCollection.find({}).toArray((err, document) => {
+      res.send(document);
+    });
+  });
+
+  //READ SERVICES BY ID
+  app.get("/service/:id", (req, res) => {
+    const id = req.params.id;
+    ServiceCollection.find({
+      _id: ObjectId(id),
+    }).toArray((err, document) => {
       res.send(document);
     });
   });
@@ -124,6 +136,7 @@ client.connect((err) => {
   //READ ORDERS
   app.post("/orders", (req, res) => {
     const userInfo = req.body.email;
+    console.log(req.body);
     AdminCollection.find({ email: userInfo }).toArray((err, document) => {
       if (document.length > 0) {
         OrderCollection.find({}).toArray((err, document) => {
